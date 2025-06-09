@@ -6,7 +6,9 @@ Raags supported:
 
 TODO:
 
-- Refactor into proper python project
+[x] Refactor into proper python project
+[] Add rejection sampling in order to improve / augment training data
+
 - Add more raag training data!
   - Sarang
   - Kanra (Darbari)

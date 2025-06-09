@@ -15,7 +15,7 @@ def main():
     sequences = make_training_data_from_directory("./data/*.txt", seq_len=seq_len)
     sequences = [np.array(seq, dtype=np.int32) for seq in sequences]
 
-    n_steps = 10000
+    n_steps = 100000
 
     for step in range(n_steps):
         batch = np.stack(
