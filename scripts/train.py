@@ -12,10 +12,12 @@ from taangenerator.config import batch_size, seq_len
 def main():
     params, optimizer, opt_state = init_model_and_optimizer()
 
-    sequences = make_training_data_from_directory("./data/*.txt", seq_len=seq_len)
+    sequences = make_training_data_from_directory(
+        "./data/kalyan/*.txt", seq_len=seq_len
+    )
     sequences = [np.array(seq, dtype=np.int32) for seq in sequences]
 
-    n_steps = 100000
+    n_steps = 150000
 
     for step in range(n_steps):
         batch = np.stack(

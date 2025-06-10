@@ -16,7 +16,7 @@ from taangenerator.sample import (
     sample_autoregressively,
     sample_with_scan,
     sample_with_while_loop,
-    generate_looped_taan_sequence,
+    sample_with_while_loop_batched,
 )
 from taangenerator.audio import (
     notes_to_midi_file,
@@ -26,6 +26,23 @@ from taangenerator.audio import (
     AudioSegment,
 )
 from taangenerator.save_load import load_model
+
+
+def generate_looped_taan_sequence(n_taans, taan_generator, pad_token=None):
+    """
+    Generate a sequence of notes with taans and rests in between.
+    Each taan: 24 notes
+    Each rest: 24 steps (None)
+    """
+    all_notes = []
+    for _ in range(n_taans):
+        taan = taan_generator()
+        assert (
+            len(taan) % 24 == 0
+        ), f"Taan generator must return multiple of 24 notes: {len(taan)} notes"
+        all_notes.extend(taan)
+        all_notes.extend([pad_token] * 24)
+    return all_notes
 
 
 def latest_checkpoint(directory="checkpoints"):
@@ -43,7 +60,7 @@ def one_taan(params):
         key = jax.random.PRNGKey(int.from_bytes(os.urandom(4), "big"))
         taan = sample_with_while_loop(
             params,
-            [random.choice([60, 68, 73])],
+            [random.choice([65, 66, 68, 69])],
             max_len=72,
             key=key,
             temperature=1.0,
