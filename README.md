@@ -8,9 +8,7 @@ Raags supported:
 
 TODO:
 
-[] Add rejection sampling in order to improve / augment training data
-
-- Add more raag training data!
+- Add more raag training data\!
   - Sarang
   - Kanra (Darbari)
   - Tilang
